@@ -72,6 +72,25 @@ export interface Transaction {
   created: string;
 }
 
+export interface Donation {
+  id: string;
+  user_id: string | null;
+  donor_name: string;
+  course_id: string;
+  amount: number;
+  message: string;
+  status: "pending" | "success";
+  created: string;
+}
+
+export interface WaitlistEntry {
+  id: string;
+  course_id: string;
+  email: string;
+  wa_number: string;
+  created: string;
+}
+
 export interface User {
   id: string;
   name: string;
@@ -246,6 +265,72 @@ export const mockTransactions: Transaction[] = [
     payment_ref: "MAYAR-12345",
     status: "success",
     created: "2024-02-20T14:30:00Z"
+  }
+];
+
+// Mock donations
+export const mockDonations: Donation[] = [
+  {
+    id: "don-1",
+    user_id: "user-1",
+    donor_name: "Ahmad Budiman",
+    course_id: "course-2",
+    amount: 25000,
+    message: "Terima kasih atas course gratisnya! 🙏",
+    status: "success",
+    created: "2024-01-16T08:30:00Z"
+  },
+  {
+    id: "don-2",
+    user_id: null,
+    donor_name: "Siti Nurhaliza",
+    course_id: "course-2",
+    amount: 50000,
+    message: "Sangat membantu untuk belajar automation",
+    status: "success",
+    created: "2024-01-20T14:15:00Z"
+  },
+  {
+    id: "don-3",
+    user_id: null,
+    donor_name: "Budi Santoso",
+    course_id: "course-2",
+    amount: 10000,
+    message: "",
+    status: "pending",
+    created: "2024-02-01T09:00:00Z"
+  }
+];
+
+// Mock waitlist
+export const mockWaitlist: WaitlistEntry[] = [
+  {
+    id: "wl-1",
+    course_id: "course-3",
+    email: "user1@example.com",
+    wa_number: "081234567001",
+    created: "2024-01-10T10:00:00Z"
+  },
+  {
+    id: "wl-2",
+    course_id: "course-3",
+    email: "user2@example.com",
+    wa_number: "",
+    created: "2024-01-12T11:30:00Z"
+  },
+  {
+    id: "wl-3",
+    course_id: "course-4",
+    email: "",
+    wa_number: "081234567003",
+    created: "2024-01-15T09:45:00Z"
+  },
+  {
+    id: "wl-4",
+    course_id: "course-4",
+    email: "user4@example.com",
+    wa_number: "081234567004",
+    created: "2024-02-05T16:20:00Z"
   }
 ];
 
