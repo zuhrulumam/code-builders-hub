@@ -24,12 +24,30 @@ export interface Chapter {
 
 export interface Lesson {
   id: string;
+  slug: string;
   chapter_id: string;
   title: string;
   order_index: number;
   is_free_preview: boolean;
   video_url: string | null;
   duration_minutes: number;
+  content_markdown: string;
+  code_snippets: CodeSnippet[];
+}
+
+export interface CodeSnippet {
+  filename: string;
+  language: string;
+  code: string;
+}
+
+export interface LessonProgress {
+  id: string;
+  user_id: string;
+  lesson_id: string;
+  course_id: string;
+  is_completed: boolean;
+  completed_at: string | null;
 }
 
 export interface Enrollment {
@@ -155,32 +173,32 @@ export const mockChapters: Chapter[] = [
   { id: "ch-8", course_id: "course-2", title: "Advanced Automation", order_index: 3 },
 ];
 
-// Mock lessons
+// Mock lessons (basic metadata - full content in learningData.ts)
 export const mockLessons: Lesson[] = [
   // Course 1 - Chapter 1
-  { id: "l-1", chapter_id: "ch-1", title: "Intro & Apa yang Akan Kamu Bangun", order_index: 1, is_free_preview: true, video_url: "https://youtube.com/watch?v=abc", duration_minutes: 8 },
-  { id: "l-2", chapter_id: "ch-1", title: "Setup Akun Lovable", order_index: 2, is_free_preview: true, video_url: "https://youtube.com/watch?v=def", duration_minutes: 5 },
-  { id: "l-3", chapter_id: "ch-1", title: "Setup Supabase Project", order_index: 3, is_free_preview: false, video_url: "https://youtube.com/watch?v=ghi", duration_minutes: 12 },
+  { id: "l-1", slug: "intro-apa-yang-akan-kamu-bangun", chapter_id: "ch-1", title: "Intro & Apa yang Akan Kamu Bangun", order_index: 1, is_free_preview: true, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 8, content_markdown: "", code_snippets: [] },
+  { id: "l-2", slug: "setup-akun-lovable", chapter_id: "ch-1", title: "Setup Akun Lovable", order_index: 2, is_free_preview: true, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 5, content_markdown: "", code_snippets: [] },
+  { id: "l-3", slug: "setup-supabase-project", chapter_id: "ch-1", title: "Setup Supabase Project", order_index: 3, is_free_preview: false, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 12, content_markdown: "", code_snippets: [] },
   // Course 1 - Chapter 2
-  { id: "l-4", chapter_id: "ch-2", title: "Prompting yang Efektif", order_index: 1, is_free_preview: false, video_url: "https://youtube.com/watch?v=jkl", duration_minutes: 15 },
-  { id: "l-5", chapter_id: "ch-2", title: "Build Landing Page", order_index: 2, is_free_preview: false, video_url: "https://youtube.com/watch?v=mno", duration_minutes: 20 },
-  { id: "l-6", chapter_id: "ch-2", title: "Build Dashboard", order_index: 3, is_free_preview: false, video_url: "https://youtube.com/watch?v=pqr", duration_minutes: 25 },
+  { id: "l-4", slug: "prompting-yang-efektif", chapter_id: "ch-2", title: "Prompting yang Efektif", order_index: 1, is_free_preview: false, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 15, content_markdown: "", code_snippets: [] },
+  { id: "l-5", slug: "build-landing-page", chapter_id: "ch-2", title: "Build Landing Page", order_index: 2, is_free_preview: false, video_url: null, duration_minutes: 20, content_markdown: "", code_snippets: [] },
+  { id: "l-6", slug: "build-dashboard", chapter_id: "ch-2", title: "Build Dashboard", order_index: 3, is_free_preview: false, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 25, content_markdown: "", code_snippets: [] },
   // Course 1 - Chapter 3
-  { id: "l-7", chapter_id: "ch-3", title: "Setup Database Schema", order_index: 1, is_free_preview: false, video_url: "https://youtube.com/watch?v=stu", duration_minutes: 18 },
-  { id: "l-8", chapter_id: "ch-3", title: "Implement Auth", order_index: 2, is_free_preview: false, video_url: "https://youtube.com/watch?v=vwx", duration_minutes: 22 },
+  { id: "l-7", slug: "setup-database-schema", chapter_id: "ch-3", title: "Setup Database Schema", order_index: 1, is_free_preview: false, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 18, content_markdown: "", code_snippets: [] },
+  { id: "l-8", slug: "implement-auth", chapter_id: "ch-3", title: "Implement Auth", order_index: 2, is_free_preview: false, video_url: null, duration_minutes: 22, content_markdown: "", code_snippets: [] },
   // Course 1 - Chapter 4
-  { id: "l-9", chapter_id: "ch-4", title: "Setup Mayar Account", order_index: 1, is_free_preview: false, video_url: "https://youtube.com/watch?v=yza", duration_minutes: 10 },
-  { id: "l-10", chapter_id: "ch-4", title: "Integrate Payment Flow", order_index: 2, is_free_preview: false, video_url: "https://youtube.com/watch?v=bcd", duration_minutes: 30 },
+  { id: "l-9", slug: "setup-mayar-account", chapter_id: "ch-4", title: "Setup Mayar Account", order_index: 1, is_free_preview: false, video_url: null, duration_minutes: 10, content_markdown: "", code_snippets: [] },
+  { id: "l-10", slug: "integrate-payment-flow", chapter_id: "ch-4", title: "Integrate Payment Flow", order_index: 2, is_free_preview: false, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 30, content_markdown: "", code_snippets: [] },
   // Course 1 - Chapter 5
-  { id: "l-11", chapter_id: "ch-5", title: "Deploy ke Production", order_index: 1, is_free_preview: false, video_url: "https://youtube.com/watch?v=efg", duration_minutes: 15 },
-  { id: "l-12", chapter_id: "ch-5", title: "Setup Custom Domain", order_index: 2, is_free_preview: false, video_url: "https://youtube.com/watch?v=hij", duration_minutes: 8 },
+  { id: "l-11", slug: "deploy-ke-production", chapter_id: "ch-5", title: "Deploy ke Production", order_index: 1, is_free_preview: false, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 15, content_markdown: "", code_snippets: [] },
+  { id: "l-12", slug: "setup-custom-domain", chapter_id: "ch-5", title: "Setup Custom Domain", order_index: 2, is_free_preview: false, video_url: null, duration_minutes: 8, content_markdown: "", code_snippets: [] },
   // Course 2 - Chapters
-  { id: "l-13", chapter_id: "ch-6", title: "Apa itu Make.com?", order_index: 1, is_free_preview: true, video_url: "https://youtube.com/watch?v=klm", duration_minutes: 10 },
-  { id: "l-14", chapter_id: "ch-6", title: "Interface Tour", order_index: 2, is_free_preview: true, video_url: "https://youtube.com/watch?v=nop", duration_minutes: 12 },
-  { id: "l-15", chapter_id: "ch-7", title: "Connect Google Sheets", order_index: 1, is_free_preview: false, video_url: "https://youtube.com/watch?v=qrs", duration_minutes: 15 },
-  { id: "l-16", chapter_id: "ch-7", title: "Email Automation", order_index: 2, is_free_preview: false, video_url: "https://youtube.com/watch?v=tuv", duration_minutes: 18 },
-  { id: "l-17", chapter_id: "ch-8", title: "Multi-step Scenarios", order_index: 1, is_free_preview: false, video_url: "https://youtube.com/watch?v=wxy", duration_minutes: 20 },
-  { id: "l-18", chapter_id: "ch-8", title: "Error Handling", order_index: 2, is_free_preview: false, video_url: "https://youtube.com/watch?v=zab", duration_minutes: 14 },
+  { id: "l-13", slug: "apa-itu-make-com", chapter_id: "ch-6", title: "Apa itu Make.com?", order_index: 1, is_free_preview: true, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 10, content_markdown: "", code_snippets: [] },
+  { id: "l-14", slug: "interface-tour", chapter_id: "ch-6", title: "Interface Tour", order_index: 2, is_free_preview: true, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 12, content_markdown: "", code_snippets: [] },
+  { id: "l-15", slug: "connect-google-sheets", chapter_id: "ch-7", title: "Connect Google Sheets", order_index: 1, is_free_preview: false, video_url: null, duration_minutes: 15, content_markdown: "", code_snippets: [] },
+  { id: "l-16", slug: "email-automation", chapter_id: "ch-7", title: "Email Automation", order_index: 2, is_free_preview: false, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 18, content_markdown: "", code_snippets: [] },
+  { id: "l-17", slug: "multi-step-scenarios", chapter_id: "ch-8", title: "Multi-step Scenarios", order_index: 1, is_free_preview: false, video_url: null, duration_minutes: 20, content_markdown: "", code_snippets: [] },
+  { id: "l-18", slug: "error-handling", chapter_id: "ch-8", title: "Error Handling", order_index: 2, is_free_preview: false, video_url: "https://youtube.com/watch?v=dQw4w9WgXcQ", duration_minutes: 14, content_markdown: "", code_snippets: [] },
 ];
 
 // Mock enrollments (for logged in user simulation)
