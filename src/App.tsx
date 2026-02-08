@@ -12,6 +12,7 @@ import MyCourses from "./pages/dashboard/MyCourses";
 import BrowseCourses from "./pages/dashboard/BrowseCourses";
 import Transactions from "./pages/dashboard/Transactions";
 import Settings from "./pages/dashboard/Settings";
+import LearningPage from "./pages/LearningPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,10 @@ const App = () => (
           <Route path="/courses" element={<CoursesPage />} />
           <Route path="/courses/:slug" element={<CourseDetailPage />} />
           <Route path="/payment/callback" element={<PaymentCallbackPage />} />
+          
+          {/* Learning Routes */}
+          <Route path="/learn/:courseSlug" element={<LearningPage />} />
+          <Route path="/learn/:courseSlug/:lessonSlug" element={<LearningPage />} />
           
           {/* Dashboard Routes */}
           <Route path="/dashboard" element={<DashboardLayout />}>
