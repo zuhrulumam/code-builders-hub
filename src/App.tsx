@@ -7,6 +7,11 @@ import Index from "./pages/Index";
 import CoursesPage from "./pages/CoursesPage";
 import CourseDetailPage from "./pages/CourseDetailPage";
 import PaymentCallbackPage from "./pages/PaymentCallbackPage";
+import DashboardLayout from "./components/dashboard/DashboardLayout";
+import MyCourses from "./pages/dashboard/MyCourses";
+import BrowseCourses from "./pages/dashboard/BrowseCourses";
+import Transactions from "./pages/dashboard/Transactions";
+import Settings from "./pages/dashboard/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +27,15 @@ const App = () => (
           <Route path="/courses" element={<CoursesPage />} />
           <Route path="/courses/:slug" element={<CourseDetailPage />} />
           <Route path="/payment/callback" element={<PaymentCallbackPage />} />
+          
+          {/* Dashboard Routes */}
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<MyCourses />} />
+            <Route path="browse" element={<BrowseCourses />} />
+            <Route path="transactions" element={<Transactions />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

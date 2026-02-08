@@ -41,6 +41,27 @@ export interface Enrollment {
   progress: number;
 }
 
+export interface Transaction {
+  id: string;
+  user_id: string;
+  course_id: string;
+  amount: number;
+  original_price: number;
+  discount_applied: number;
+  payment_method: string;
+  payment_ref: string;
+  status: "pending" | "success" | "failed";
+  created: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  wa_number: string;
+}
+
 // Mock courses
 export const mockCourses: Course[] = [
   {
@@ -171,8 +192,53 @@ export const mockEnrollments: Enrollment[] = [
     payment_status: "free",
     enrolled_at: "2024-01-15T10:00:00Z",
     progress: 60
+  },
+  {
+    id: "enroll-2",
+    user_id: "user-1",
+    course_id: "course-1", // Paid course
+    payment_status: "paid",
+    enrolled_at: "2024-02-20T14:30:00Z",
+    progress: 25
   }
 ];
+
+// Mock transactions
+export const mockTransactions: Transaction[] = [
+  {
+    id: "tx-1",
+    user_id: "user-1",
+    course_id: "course-2",
+    amount: 0,
+    original_price: 0,
+    discount_applied: 0,
+    payment_method: "free",
+    payment_ref: "FREE-001",
+    status: "success",
+    created: "2024-01-15T10:00:00Z"
+  },
+  {
+    id: "tx-2",
+    user_id: "user-1",
+    course_id: "course-1",
+    amount: 99000,
+    original_price: 150000,
+    discount_applied: 51000,
+    payment_method: "mayar",
+    payment_ref: "MAYAR-12345",
+    status: "success",
+    created: "2024-02-20T14:30:00Z"
+  }
+];
+
+// Mock current user
+export const mockCurrentUser: User = {
+  id: "user-1",
+  name: "Ahmad Budiman",
+  email: "ahmad.budiman@gmail.com",
+  avatar: "",
+  wa_number: "081234567890"
+};
 
 // Helper functions
 export const getCourseBySlug = (slug: string): Course | undefined => {
